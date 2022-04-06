@@ -1,0 +1,64 @@
+Select * from Orders
+select * from OrderItem
+select * from Product
+Select * from Customer
+
+alter table Orders                         --1
+add constraint Orders_CustomerId_fk
+foreign key (CustomerId) References
+Customer(C_ID)
+
+alter table OrderItem
+add constraint OrdersItem_OrderId_fk
+foreign key (OrderId) References
+Orders(O_Id)
+
+alter table OrderItem
+add constraint OrdersItem_ProductId_fk
+foreign key (ProductId) References
+Product(P_Id)
+
+ALTER TABLE OrderItem
+ADD PRIMARY KEY (ID);
+
+Insert into Customer values(5006, 'Ram','Sharma','Mumbai','india',1236521452)  --2
+
+ALTER TABLE Customer
+Alter column FirstName nvarchar(50) NOT NULL;--3
+
+ALTER TABLE Orders
+Alter column OrderDate datetime NOT NULL;--4
+
+Select * from Customer--5
+
+select Country from Customer--6
+where Country Like '[AI]%';
+
+select FirstName From Customer--7
+where FirstName Like '__i%'
+
+select * From Customer --8
+where Country='Germany'
+
+Select Concat(FirstName,' ', LastName) as "FullName" --9
+from Customer
+
+select * From Customer--10
+where FirstName Like '_U%'
+
+select UnitPrice, Orderdate, OrderNumber, CustomerId, TotalAmount --12
+from OrderItem inner join Orders 
+ON OrderItem.OrderId = Orders.O_Id
+where UnitPrice>10 AND 20>UnitPrice
+
+select * from Orders --13
+order by 
+OrderDate ASC
+
+select * from Product
+where Package='Haz mat'
+
+select count(P_ID) as Average from Product
+inner join OrderItem
+on Product.P_Id = OrderItem.ProductID
+Group by ProductName
